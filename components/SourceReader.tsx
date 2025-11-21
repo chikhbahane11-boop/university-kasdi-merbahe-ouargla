@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BookOpen, ChevronDown, ChevronUp, Quote } from 'lucide-react';
 import { LECTURE_CONTENT, GLOSSARY_TERMS } from '../constants';
@@ -13,45 +13,54 @@ const SourceReader: React.FC<SourceReaderProps> = ({ sectionKey, defaultOpen = f
   const [isOpen, setIsOpen] = useState(defaultOpen);
   const content = LECTURE_CONTENT[sectionKey];
 
-  // Helper to highlight terms in text
-  const processText = (text: string) => {
-    if (!text) return null;
+  // Memoize the regex generation to avoid performance cost on re-renders
+  const processedContent = useMemo(() => {
+    if (!content) return null;
 
-    // 1. Collect all patterns with their keys
+    // 1. Collect all patterns
     const allPatterns: { key: string; pattern: string }[] = [];
     Object.entries(GLOSSARY_TERMS).forEach(([key, term]) => {
       term.patterns.forEach(pattern => {
-        if (pattern) allPatterns.push({ key, pattern });
+        if (pattern && pattern.trim().length > 2) { // Only match significant words
+            allPatterns.push({ key, pattern });
+        }
       });
     });
 
-    // 2. Sort by length desc to match longest terms first (e.g. "الشركة التجارية" before "الشركة")
+    // 2. Sort by length (descending) to ensure "الشركة التجارية" matches before "الشركة"
     allPatterns.sort((a, b) => b.pattern.length - a.pattern.length);
 
-    // 3. Create Regex
-    if (allPatterns.length === 0) return text;
-    
-    // Escape regex special chars
-    const escapeRegExp = (string: string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const patternString = allPatterns.map(p => escapeRegExp(p.pattern)).join('|');
-    const regex = new RegExp(`(${patternString})`, 'g');
+    // 3. Function to process a single string paragraph
+    const processParagraph = (text: string) => {
+      if (!text) return null;
 
-    // 4. Split and Map
-    const parts = text.split(regex);
-    
-    return parts.map((part, index) => {
-      // Find if this part matches any pattern
-      const match = allPatterns.find(p => p.pattern === part);
-      if (match) {
-        return (
-          <GlossaryTerm key={`${match.key}-${index}`} termKey={match.key}>
-            {part}
-          </GlossaryTerm>
-        );
-      }
-      return part;
-    });
-  };
+      // Create a regex that matches any of the patterns
+      // We use capture groups () to include the delimiter in the result array
+      const patternString = allPatterns.map(p => p.pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+      
+      if (!patternString) return text;
+
+      const regex = new RegExp(`(${patternString})`, 'g');
+      const parts = text.split(regex);
+
+      return parts.map((part, index) => {
+        // Check if this part is a keyword
+        const match = allPatterns.find(p => p.pattern === part);
+        if (match) {
+          return (
+            <GlossaryTerm key={`${match.key}-${index}`} termKey={match.key}>
+              <span className="bg-yellow-100/50 border-b-2 border-yellow-400/50 pb-0.5 cursor-help transition-colors hover:bg-yellow-200">
+                {part}
+              </span>
+            </GlossaryTerm>
+          );
+        }
+        return part;
+      });
+    };
+
+    return content.text.map(processParagraph);
+  }, [content]);
 
   if (!content) return null;
 
@@ -86,16 +95,16 @@ const SourceReader: React.FC<SourceReaderProps> = ({ sectionKey, defaultOpen = f
               <Quote className="absolute top-4 right-4 w-8 h-8 text-slate-200 rotate-180" />
               
               <div className="space-y-4 relative z-10">
-                {content.text.map((paragraph, idx) => (
-                  <p key={idx} className="text-justify border-r-2 border-slate-300 pr-4">
-                    {processText(paragraph)}
+                {processedContent?.map((paragraph, idx) => (
+                  <p key={idx} className="text-justify border-r-2 border-slate-300 pr-4 pl-2">
+                    {paragraph}
                   </p>
                 ))}
               </div>
 
               <div className="mt-6 pt-4 border-t border-slate-200 text-xs text-slate-400 flex flex-wrap justify-between items-center gap-2">
                 <span>المصدر: مطبوعة محاضرات في الشركات التجارية - د. ضيف شعيب</span>
-                <span className="bg-indigo-100 text-indigo-700 px-2 py-1 rounded">نص مشروح: انقر على الكلمات المظللة</span>
+                <span className="bg-yellow-100 text-yellow-700 px-2 py-1 rounded font-bold">نص تفاعلي: انقر على الكلمات الملونة للشرح</span>
               </div>
             </div>
           </motion.div>
