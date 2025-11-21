@@ -1,82 +1,146 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Map, ScrollText, Star } from 'lucide-react';
+import { Briefcase, AlertTriangle, MapPin, Send, Cloud, Coffee } from 'lucide-react';
+import SourceReader from './SourceReader';
+import GlossaryTerm from './GlossaryTerm';
+
+const MotionDiv = motion.div as any;
 
 const StageIntro: React.FC = () => {
   const [revealed, setRevealed] = useState(false);
+  const [studentWord, setStudentWord] = useState('');
+  const [submittedWords, setSubmittedWords] = useState<string[]>([]);
+
+  const handleAddWord = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (studentWord.trim()) {
+      setSubmittedWords([...submittedWords, studentWord.trim()]);
+      setStudentWord('');
+    }
+  };
 
   return (
-    <div className="space-y-8">
-      <div className="text-center space-y-4">
-        <h2 className="text-3xl font-bold text-slate-900">المدخل: قصة عبر الزمن</h2>
-        <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-          دعونا نبدأ برحلة إلى الماضي.. تخيلوا أننا في عام 1945، وعلماء الآثار يكتشفون شيئاً مذهلاً.
+    <div className="space-y-10">
+      {/* 1. Warm-up: Word Cloud Simulation */}
+      <div className="text-center space-y-6 bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+        <div className="flex items-center justify-center gap-3 mb-4">
+          <Cloud className="w-10 h-10 text-sky-500" />
+          <h2 className="text-3xl font-bold text-slate-900">التهيئة الذهنية</h2>
+        </div>
+        <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          صباح الخير! لنبدأ بهذا السؤال السريع..
+          <br/>
+          عندما تسمع كلمة "<GlossaryTerm termKey="commercial_company">شركة تجارية</GlossaryTerm>"، ما هي أول كلمة تخطر ببالك؟
         </p>
+
+        <form onSubmit={handleAddWord} className="flex gap-3 max-w-md mx-auto">
+          <input 
+            type="text" 
+            value={studentWord}
+            onChange={(e) => setStudentWord(e.target.value)}
+            placeholder="اكتب كلمتك هنا (مثلاً: ربح، مال، مدير، مخاطرة...)"
+            className="flex-1 p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-sky-500 outline-none text-right"
+          />
+          <button type="submit" className="bg-sky-600 text-white p-3 rounded-xl hover:bg-sky-700 transition">
+            <Send className="w-5 h-5" />
+          </button>
+        </form>
+
+        {/* Word Cloud Display */}
+        {submittedWords.length > 0 && (
+          <div className="flex flex-wrap justify-center gap-3 mt-6">
+            {submittedWords.map((word, idx) => (
+              <motion.span 
+                key={idx}
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className={`px-4 py-2 rounded-full text-sm font-bold shadow-sm ${
+                  idx % 3 === 0 ? 'bg-indigo-100 text-indigo-700' : 
+                  idx % 3 === 1 ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'
+                }`}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </div>
+        )}
       </div>
 
+      {/* 2. Narrative: The Cafe Scenario (Hook) */}
+      <div className="bg-slate-50 p-8 rounded-2xl border border-slate-200 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-24 h-24 bg-amber-100 rounded-br-full opacity-50"></div>
+        <div className="relative z-10">
+          <h3 className="text-2xl font-bold text-amber-900 mb-4 flex items-center gap-2">
+            <Coffee className="w-6 h-6" />
+            سيناريو الانطلاق: مشروع عين صالح
+          </h3>
+          <p className="text-lg text-slate-700 leading-relaxed">
+            تخيل أن ثلاثة طلاب أصدقاء قرروا بعد التخرج فتح <strong>مقهى عصري</strong> في وسط مدينة عين صالح. 
+            اتفقوا على جمع مدخراتهم (رأس المال)، واستئجار محل، وتقسيم الأرباح بينهم.
+            <br/><br/>
+            السؤال الجوهري هنا: <strong>هل هؤلاء الأصدقاء بصدد تكوين شركة؟ وهل هي شركة مدنية أم تجارية؟</strong>
+            <br/>
+            إجابتك على هذا السؤال ستحدد القانون الذي سيطبق عليهم، الضرائب التي سيدفعونها، وحتى مصيرهم إذا فشل المشروع!
+          </p>
+        </div>
+      </div>
+
+      {/* 3. The Hook: "What If" Scenario */}
       <div className="grid md:grid-cols-2 gap-8 items-center">
-        {/* The Hook Card */}
-        <motion.div 
-          className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-8 shadow-lg relative overflow-hidden cursor-pointer"
-          whileHover={{ scale: 1.02 }}
+        <MotionDiv 
+          className="bg-rose-50 border-2 border-rose-200 rounded-2xl p-8 shadow-lg cursor-pointer hover:bg-rose-100 transition-colors group"
           onClick={() => setRevealed(true)}
         >
-          <div className="absolute top-0 right-0 w-20 h-20 bg-amber-200 rounded-bl-full opacity-50"></div>
-          
           {!revealed ? (
             <div className="flex flex-col items-center justify-center h-64 text-center space-y-4">
-              <Star className="w-16 h-16 text-amber-600 animate-pulse" />
-              <h3 className="text-2xl font-bold text-amber-900">الاكتشاف العظيم</h3>
-              <p className="text-amber-800">انقر لكشف السر الذي عمره 3000 عام</p>
+              <AlertTriangle className="w-16 h-16 text-rose-500 animate-bounce" />
+              <h3 className="text-2xl font-bold text-rose-900 group-hover:scale-105 transition-transform">تحدي الفهم</h3>
+              <p className="text-rose-800 font-medium">انقر لتكتشف: ماذا لو أخطأوا في اختيار نوع الشركة؟</p>
             </div>
           ) : (
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="space-y-4 text-right"
+            <MotionDiv 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="space-y-4 text-right h-64 overflow-y-auto custom-scrollbar"
             >
-              <div className="flex items-center gap-3 mb-4 border-b border-amber-200 pb-4">
-                <ScrollText className="w-8 h-8 text-amber-700" />
-                <h3 className="text-xl font-bold text-amber-900">الوثيقة المكتشفة</h3>
-              </div>
-              <p className="text-amber-800 leading-relaxed">
-                لم يجدوا ذهباً ولا كنوزاً، بل وجدوا نصاً يتحدث عن:
-              </p>
-              <ul className="space-y-2 text-amber-900 font-medium list-disc list-inside">
-                <li>السلام الدائم بين دولتين</li>
-                <li>الدفاع المشترك (تحالف)</li>
-                <li>تسليم اللاجئين السياسيين</li>
-                <li>احترام الحدود</li>
+              <h3 className="text-xl font-bold text-rose-900 border-b border-rose-200 pb-2 mb-2">مخاطر الاختيار الخاطئ:</h3>
+              <ul className="space-y-3 text-rose-800 list-disc list-inside text-sm font-medium">
+                <li><strong>المسؤولية المطلقة:</strong> في بعض الشركات، قد يخسرون منازلهم وسياراتهم لسداد ديون المقهى!</li>
+                <li><strong>الإفلاس:</strong> إذا اعتبرت تجارية، قد يتعرضون لعقوبات الإفلاس القاسية.</li>
+                <li><strong>الضرائب:</strong> التصنيف الخاطئ قد يعرضهم لغرامات جبائية ثقيلة.</li>
               </ul>
-              <p className="mt-4 text-sm text-amber-700 italic border-t border-amber-200 pt-4">
-                إنها <strong>معاهدة قادش</strong> (1259 ق.م) بين الفراعنة والحيثيين. نفس مبادئ الأمم المتحدة اليوم!
+              <p className="mt-4 text-sm text-rose-900 font-bold text-center">
+                الخلاصة: اختيار القالب القانوني ليس شكليات، بل حماية!
               </p>
-            </motion.div>
+            </MotionDiv>
           )}
-        </motion.div>
+        </MotionDiv>
 
         {/* Objectives */}
-        <div className="bg-white rounded-2xl p-6 shadow-md border border-slate-100">
-          <h3 className="text-xl font-bold text-indigo-900 mb-4 flex items-center gap-2">
-            <Map className="w-5 h-5" />
-            أهداف رحلتنا اليوم
+        <div className="bg-white rounded-2xl p-8 shadow-md border border-slate-100 h-full flex flex-col justify-center">
+          <h3 className="text-xl font-bold text-indigo-900 mb-6 flex items-center gap-2">
+            <Briefcase className="w-6 h-6" />
+            أهداف المحاضرة (90 دقيقة)
           </h3>
           <ul className="space-y-4">
-            <li className="flex items-start gap-3 bg-slate-50 p-3 rounded-lg">
-              <span className="flex-shrink-0 w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-sm">1</span>
-              <span className="text-slate-700">التمييز بوضوح بين "القانون الدولي" و "المجتمع الدولي".</span>
+            <li className="flex items-center gap-3">
+              <span className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center font-bold text-slate-600">1</span>
+              <span className="text-slate-700">التمييز الدقيق بين الشركة المدنية والتجارية (حسب القانون الجزائري).</span>
             </li>
-            <li className="flex items-start gap-3 bg-slate-50 p-3 rounded-lg">
-              <span className="flex-shrink-0 w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-sm">2</span>
-              <span className="text-slate-700">استكشاف مساهمات بابل، مصر، وروما في نشأة القواعد الدولية.</span>
+            <li className="flex items-center gap-3">
+              <span className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center font-bold text-slate-600">2</span>
+              <span className="text-slate-700">استيعاب أنواع الشركات (تضامن، مساهمة، محدودة) والفرق بينها.</span>
             </li>
-            <li className="flex items-start gap-3 bg-slate-50 p-3 rounded-lg">
-              <span className="flex-shrink-0 w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-sm">3</span>
-              <span className="text-slate-700">إثبات أن القانون الدولي تراث إنساني مشترك وليس اختراعاً غربياً حديثاً.</span>
+            <li className="flex items-center gap-3">
+              <span className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center font-bold text-slate-600">3</span>
+              <span className="text-slate-700">تطبيق المعرفة على حالات واقعية محلية.</span>
             </li>
           </ul>
         </div>
       </div>
+
+      {/* Contextual Source Reader */}
+      <SourceReader sectionKey="intro" />
     </div>
   );
 };

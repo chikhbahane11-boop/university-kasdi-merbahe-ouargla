@@ -1,14 +1,28 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TIMELINE_DATA, QUIZ_QUESTIONS } from '../constants';
-import { ArrowLeft, ArrowRight, Scroll, CheckCircle2, XCircle, HelpCircle } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Scroll, CheckCircle2, HelpCircle, Briefcase, Users, Building } from 'lucide-react';
+import GlossaryTerm from './GlossaryTerm';
+import SourceReader from './SourceReader';
 
-const StageHistory: React.FC = () => {
+const MotionDiv = motion.div as any;
+
+// Helper to get icon based on string
+const getIcon = (iconName: string) => {
+  switch(iconName) {
+    case 'users': return <Users className="w-6 h-6" />;
+    case 'briefcase': return <Briefcase className="w-6 h-6" />;
+    case 'building': return <Building className="w-6 h-6" />;
+    default: return <Scroll className="w-6 h-6" />;
+  }
+};
+
+const StageTypes: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [quizState, setQuizState] = useState<{ [key: number]: number | null }>({});
   const [showQuizResult, setShowQuizResult] = useState<{ [key: number]: boolean }>({});
 
-  const currentEvent = TIMELINE_DATA[activeIndex];
+  const currentType = TIMELINE_DATA[activeIndex];
 
   const handleNext = () => {
     if (activeIndex < TIMELINE_DATA.length - 1) setActiveIndex(prev => prev + 1);
@@ -26,8 +40,8 @@ const StageHistory: React.FC = () => {
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-slate-900">رحلة عبر الزمن</h2>
-        <p className="text-slate-500">استكشاف جذور القانون الدولي في الحضارات القديمة</p>
+        <h2 className="text-3xl font-bold text-slate-900">أنواع الشركات التجارية</h2>
+        <p className="text-slate-500">تدرج النماذج من "الاعتبار الشخصي" إلى "الاعتبار المالي"</p>
       </div>
 
       {/* Stepper Navigation */}
@@ -54,7 +68,7 @@ const StageHistory: React.FC = () => {
       {/* Main Content Card */}
       <div className="relative bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden min-h-[500px]">
         <AnimatePresence mode="wait">
-          <motion.div
+          <MotionDiv
             key={activeIndex}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -65,39 +79,38 @@ const StageHistory: React.FC = () => {
               {/* Left: Info */}
               <div className="flex-1 space-y-6">
                 <div className="inline-block bg-indigo-50 text-indigo-700 px-4 py-1 rounded-full text-sm font-bold">
-                  {currentEvent.year}
+                  {currentType.year}
                 </div>
-                <h2 className="text-4xl font-extrabold text-slate-800">{currentEvent.civilization}</h2>
+                <h2 className="text-4xl font-extrabold text-slate-800">{currentType.civilization}</h2>
                 <div className="flex items-center gap-3 text-xl text-amber-700 font-serif italic border-r-4 border-amber-400 pr-4 bg-amber-50 p-2 rounded-r">
-                  <Scroll className="w-6 h-6" />
-                  {currentEvent.title}
+                  {getIcon(currentType.icon)}
+                  {currentType.title}
                 </div>
                 <p className="text-lg text-slate-600 leading-relaxed">
-                  {currentEvent.description}
+                  {currentType.description}
                 </p>
                 
                 <div className="bg-slate-50 rounded-xl p-6">
-                  <h4 className="font-bold text-slate-900 mb-4 border-b pb-2">أهم المبادئ التي أرستها:</h4>
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {currentEvent.principles.map((p, i) => (
+                  <h4 className="font-bold text-slate-900 mb-4 border-b pb-2">أهم الخصائص القانونية:</h4>
+                  <ul className="grid grid-cols-1 gap-3">
+                    {currentType.principles.map((p, i) => (
                       <li key={i} className="flex items-center gap-2 text-slate-700">
-                        <CheckCircle2 className="w-5 h-5 text-green-500" />
-                        {p}
+                        <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
+                        <span>{p}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
               </div>
 
-              {/* Right: Interactive/Visual Placeholder or Quiz specific to era */}
+              {/* Right: Quiz */}
               <div className="w-full md:w-1/3 space-y-4">
-                 <div className="bg-gradient-to-br from-slate-800 to-slate-900 text-white p-6 rounded-2xl shadow-lg">
+                 <div className="bg-gradient-to-br from-slate-800 to-slate-900 text-white p-6 rounded-2xl shadow-lg h-full">
                     <h4 className="font-bold text-lg mb-4 flex items-center gap-2">
                       <HelpCircle className="w-5 h-5 text-yellow-400" />
-                      اختبر فهمك
+                      سؤال سريع
                     </h4>
                     
-                    {/* Display Quiz Question relevant to current index if exists, else generic */}
                     {QUIZ_QUESTIONS[activeIndex] ? (
                       <div className="space-y-3">
                         <p className="text-sm font-medium text-slate-200 mb-4">
@@ -124,13 +137,13 @@ const StageHistory: React.FC = () => {
                           ))}
                         </div>
                         {showQuizResult[QUIZ_QUESTIONS[activeIndex].id] && (
-                          <motion.div 
+                          <MotionDiv 
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             className="mt-4 p-3 bg-white/10 rounded text-xs text-slate-200"
                           >
                             {QUIZ_QUESTIONS[activeIndex].explanation}
-                          </motion.div>
+                          </MotionDiv>
                         )}
                       </div>
                     ) : (
@@ -139,11 +152,16 @@ const StageHistory: React.FC = () => {
                  </div>
               </div>
             </div>
-          </motion.div>
+            
+            {/* Dynamic Source Reader */}
+            <div className="mt-8 pt-8 border-t border-slate-100">
+              <SourceReader sectionKey={currentType.id} defaultOpen={false} />
+            </div>
+          </MotionDiv>
         </AnimatePresence>
 
         {/* Navigation Controls */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 flex justify-between items-center bg-white/80 backdrop-blur-sm border-t border-slate-100">
+        <div className="absolute bottom-0 left-0 right-0 p-6 flex justify-between items-center bg-white/80 backdrop-blur-sm border-t border-slate-100 z-20">
           <button 
             onClick={handlePrev} 
             disabled={activeIndex === 0}
@@ -165,4 +183,4 @@ const StageHistory: React.FC = () => {
   );
 };
 
-export default StageHistory;
+export default StageTypes;
