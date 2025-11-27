@@ -1,16 +1,35 @@
 
 import React, { useState } from 'react';
-import { LayoutList, FileText, FileDown, ExternalLink } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { LayoutList, FileText, FileDown, ExternalLink, Lock, CheckCircle2, AlertCircle, BarChart3 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const StageConclusion: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'concepts' | 'classification' | 'nature'>('concepts');
+  const [showAdmin, setShowAdmin] = useState(false);
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  // الروابط
+  const STUDENT_FORM_LINK = "https://forms.gle/ZHXAnYn81c4DjEad6";
+  // ملاحظة: هذا الرابط يجب استبداله برابط "الردود" أو ملف Excel الخاص بك كأستاذ
+  const TEACHER_RESPONSES_LINK = "https://docs.google.com/forms/u/0/"; 
+
+  const handleAdminLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === 'omar2016') {
+      window.open(TEACHER_RESPONSES_LINK, '_blank');
+      setError('');
+      setPassword('');
+    } else {
+      setError('كلمة المرور غير صحيحة');
+    }
+  };
 
   return (
-    <div className="max-w-4xl mx-auto pb-12">
+    <div className="max-w-4xl mx-auto pb-12 space-y-12">
       
-      {/* Comprehensive Summary */}
-      <div className="bg-white rounded-2xl shadow-lg border border-slate-200 mb-12 overflow-hidden">
+      {/* 1. Comprehensive Summary Section */}
+      <div className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
         <div className="bg-gradient-to-r from-indigo-600 to-blue-600 p-6 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
            <div className="flex items-center gap-3">
              <LayoutList className="w-8 h-8" />
@@ -149,42 +168,88 @@ const StageConclusion: React.FC = () => {
         </div>
       </div>
 
-      {/* Exit Ticket Form - Google Form Embed */}
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-slate-900">بطاقة الخروج</h2>
-        <p className="text-slate-500">رأيك يهمنا لتطوير المحاضرات القادمة</p>
-      </div>
+      {/* 2. Exit Ticket Section (Links) */}
+      <div className="grid md:grid-cols-2 gap-8">
+        
+        {/* Student Card */}
+        <div className="bg-white p-8 rounded-2xl shadow-lg border border-slate-200 text-center flex flex-col items-center justify-center space-y-6 hover:shadow-xl transition-shadow">
+          <div className="bg-emerald-100 p-4 rounded-full text-emerald-600">
+            <CheckCircle2 className="w-12 h-12" />
+          </div>
+          <div>
+            <h3 className="text-2xl font-bold text-slate-900 mb-2">بطاقة الخروج (للطلبة)</h3>
+            <p className="text-slate-500">شاركنا ما تعلمته اليوم وسجل حضورك</p>
+          </div>
+          <a 
+            href={STUDENT_FORM_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-emerald-200 transition-all flex items-center justify-center gap-2"
+          >
+            <ExternalLink className="w-5 h-5" />
+            اضغط هنا لملء البطاقة
+          </a>
+        </div>
 
-      <div className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden relative">
-         <div className="bg-indigo-600 h-2 w-full"></div>
-         
-         <div className="relative w-full h-[800px] bg-slate-50">
-            <iframe 
-                src="https://forms.gle/ZHXAnYn81c4DjEad6"
-                width="100%" 
-                height="100%" 
-                frameBorder="0" 
-                marginHeight={0} 
-                marginWidth={0}
-                className="w-full h-full"
-                title="بطاقة الخروج - الشركات التجارية"
-            >
-                جاري التحميل...
-            </iframe>
-         </div>
+        {/* Teacher Card */}
+        <div className="bg-slate-50 p-8 rounded-2xl border border-slate-200 flex flex-col justify-center">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="bg-slate-200 p-2 rounded-lg text-slate-600">
+              <Lock className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-bold text-slate-800">فضاء الأستاذ</h3>
+          </div>
 
-         <div className="p-4 text-center bg-slate-50 border-t border-slate-200">
-            <p className="text-slate-500 text-sm mb-2">هل تواجه مشكلة في عرض النموذج؟</p>
-            <a 
-              href="https://forms.gle/ZHXAnYn81c4DjEad6" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-indigo-100 hover:bg-indigo-200 text-indigo-700 px-4 py-2 rounded-lg text-sm font-bold transition"
+          {!showAdmin ? (
+            <button 
+              onClick={() => setShowAdmin(true)}
+              className="w-full bg-white border border-slate-300 text-slate-600 font-bold py-3 rounded-xl hover:bg-slate-100 transition flex items-center justify-center gap-2"
             >
-              <ExternalLink className="w-4 h-4" />
-              افتح النموذج في نافذة جديدة
-            </a>
-         </div>
+              <BarChart3 className="w-5 h-5" />
+              عرض الردود
+            </button>
+          ) : (
+            <motion.form 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              onSubmit={handleAdminLogin}
+              className="space-y-4"
+            >
+              <div>
+                <label className="block text-xs font-bold text-slate-500 mb-1">كلمة المرور</label>
+                <input 
+                  type="password" 
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full p-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-left"
+                  placeholder="••••••••"
+                  autoFocus
+                />
+              </div>
+              {error && (
+                <p className="text-red-500 text-xs flex items-center gap-1">
+                  <AlertCircle className="w-3 h-3" /> {error}
+                </p>
+              )}
+              <div className="flex gap-2">
+                <button 
+                  type="submit"
+                  className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-lg transition"
+                >
+                  دخول
+                </button>
+                <button 
+                  type="button"
+                  onClick={() => { setShowAdmin(false); setError(''); }}
+                  className="px-4 py-2 text-slate-500 hover:bg-slate-200 rounded-lg transition"
+                >
+                  إلغاء
+                </button>
+              </div>
+            </motion.form>
+          )}
+        </div>
+
       </div>
     </div>
   );
