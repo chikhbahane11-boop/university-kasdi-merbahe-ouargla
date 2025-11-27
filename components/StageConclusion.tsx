@@ -115,7 +115,6 @@ const StageConclusion: React.FC = () => {
              <LayoutList className="w-8 h-8" />
              <div>
                <h2 className="text-xl font-bold">الملخص الشامل: الشركات التجارية</h2>
-               <p className="text-indigo-100 text-sm">وفقاً لمطبوعة د. ضيف شعيب</p>
              </div>
            </div>
            

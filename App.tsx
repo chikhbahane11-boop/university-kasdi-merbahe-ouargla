@@ -58,8 +58,8 @@ const App: React.FC = () => {
         `}>
           <div className="h-full flex flex-col p-4 lg:p-0 bg-white lg:bg-transparent">
              <div className="mb-8 hidden lg:block">
-               <h1 className="text-2xl font-extrabold text-indigo-900">دليل المحاضرة</h1>
-               <p className="text-sm text-slate-500 mt-1">قانون الشركات - د. ضيف شعيب</p>
+               <h1 className="text-2xl font-extrabold text-indigo-900">مدخل للشركات التجارية</h1>
+               <p className="text-sm text-slate-500 mt-1">مقياس الشركات التجارية</p>
              </div>
 
              <nav className="space-y-2 flex-1">

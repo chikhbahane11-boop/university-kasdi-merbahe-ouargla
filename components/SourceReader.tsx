@@ -103,7 +103,7 @@ const SourceReader: React.FC<SourceReaderProps> = ({ sectionKey, defaultOpen = f
               </div>
 
               <div className="mt-6 pt-4 border-t border-slate-200 text-xs text-slate-400 flex flex-wrap justify-between items-center gap-2">
-                <span>المصدر: مطبوعة محاضرات في الشركات التجارية - د. ضيف شعيب</span>
+                <span>المصدر: مطبوعة محاضرات في الشركات التجارية</span>
                 <span className="bg-yellow-100 text-yellow-700 px-2 py-1 rounded font-bold">نص تفاعلي: انقر على الكلمات الملونة للشرح</span>
               </div>
             </div>
