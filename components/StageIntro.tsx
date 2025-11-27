@@ -1,6 +1,7 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, AlertTriangle, MapPin, Send, Cloud, Coffee } from 'lucide-react';
+import { Briefcase, AlertTriangle, Send, Cloud, Coffee, School, FileDown } from 'lucide-react';
 import SourceReader from './SourceReader';
 import GlossaryTerm from './GlossaryTerm';
 
@@ -21,6 +22,67 @@ const StageIntro: React.FC = () => {
 
   return (
     <div className="space-y-10">
+      
+      {/* 0. Official Header (Cover Page) */}
+      <div className="bg-white p-8 rounded-3xl shadow-lg border-t-8 border-indigo-900 text-center relative overflow-hidden mb-10">
+        {/* Background Pattern */}
+        <div className="absolute top-0 left-0 w-full h-full opacity-5 bg-[radial-gradient(#4f46e5_1px,transparent_1px)] [background-size:16px_16px]"></div>
+
+        <div className="relative z-10 space-y-6">
+          {/* Ministry & University Info */}
+          <div className="space-y-2 border-b border-slate-100 pb-6">
+            <h5 className="text-sm font-bold text-slate-600 font-serif">الجمهورية الجزائرية الديمقراطية الشعبية</h5>
+            <h5 className="text-sm font-bold text-slate-600 font-serif">وزارة التعليم العالي والبحث العلمي</h5>
+            
+            <div className="flex flex-col items-center justify-center gap-2 mt-4 text-indigo-900">
+              <div className="flex items-center gap-2">
+                <School className="w-6 h-6" />
+                <h2 className="text-lg font-extrabold">جامعة التكوين المتواصل - ديدوش مراد</h2>
+              </div>
+              <h3 className="text-md font-bold text-indigo-700">مركز تمنراست - ملحقة عين صالح</h3>
+            </div>
+          </div>
+
+          {/* Module & Professor Info */}
+          <div className="py-4 space-y-4">
+            <div>
+              <span className="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full mb-2 inline-block">سنة أولى - قانون أعمال</span>
+              <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight">
+                مقياس: الشركات التجارية
+                <span className="block text-xl text-slate-500 font-medium mt-2">(مدخل قانوني وتطبيقي)</span>
+              </h1>
+            </div>
+            
+            <div className="flex flex-col md:flex-row justify-center gap-4 mt-6">
+              <div className="bg-slate-50 px-6 py-3 rounded-xl border border-slate-200">
+                <span className="text-slate-400 text-xs block mb-1">إعداد الأستاذ</span>
+                <span className="text-slate-900 font-bold text-lg">الشيخ بن بحان</span>
+              </div>
+              <div className="bg-slate-50 px-6 py-3 rounded-xl border border-slate-200">
+                <span className="text-slate-400 text-xs block mb-1">الموسم الدراسي</span>
+                <span className="text-slate-900 font-bold text-lg">2025 / 2026</span>
+              </div>
+            </div>
+          </div>
+
+          {/* PDF Download Button */}
+          <div className="pt-4 border-t border-slate-100">
+            <a 
+              href="http://dspace.univ-djelfa.dz:8080/xmlui/bitstream/handle/112/6946/%D9%85%D8%AD%D8%A7%D8%B6%D8%B1%D8%A7%D8%AA%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%B4%D8%B1%D9%83%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AC%D8%A7%D8%B1%D9%8A%D8%A9.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-slate-800 hover:bg-slate-700 text-white px-6 py-3 rounded-xl transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 group"
+            >
+              <FileDown className="w-5 h-5 group-hover:animate-bounce" />
+              <div className="text-right">
+                <span className="block text-xs text-slate-300 font-normal">المطبوعة المرجعية الرسمية</span>
+                <span className="block font-bold text-sm">تحميل مطبوعة د. ضيف شعيب (PDF)</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
       {/* 1. Warm-up: Word Cloud Simulation */}
       <div className="text-center space-y-6 bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
         <div className="flex items-center justify-center gap-3 mb-4">
