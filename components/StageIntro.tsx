@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, AlertTriangle, Send, Cloud, Coffee, School, FileDown } from 'lucide-react';
+import { Briefcase, AlertTriangle, Send, Cloud, Coffee, School } from 'lucide-react';
 import SourceReader from './SourceReader';
 import GlossaryTerm from './GlossaryTerm';
 
@@ -37,7 +37,7 @@ const StageIntro: React.FC = () => {
             <div className="flex flex-col items-center justify-center gap-2 mt-4 text-indigo-900">
               <div className="flex items-center gap-2">
                 <School className="w-6 h-6" />
-                <h2 className="text-lg font-extrabold">جامعة التكوين المتواصل - ديدوش مراد</h2>
+                <h2 className="text-lg font-extrabold">جامعة التكوين المتواصل ديدوش مراد</h2>
               </div>
               <h3 className="text-md font-bold text-indigo-700">مركز تمنراست - ملحقة عين صالح</h3>
             </div>
@@ -63,22 +63,6 @@ const StageIntro: React.FC = () => {
                 <span className="text-slate-900 font-bold text-lg">2025 / 2026</span>
               </div>
             </div>
-          </div>
-
-          {/* PDF Download Button */}
-          <div className="pt-4 border-t border-slate-100">
-            <a 
-              href="http://dspace.univ-djelfa.dz:8080/xmlui/bitstream/handle/112/6946/%D9%85%D8%AD%D8%A7%D8%B6%D8%B1%D8%A7%D8%AA%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%B4%D8%B1%D9%83%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AC%D8%A7%D8%B1%D9%8A%D8%A9.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-slate-800 hover:bg-slate-700 text-white px-6 py-3 rounded-xl transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 group"
-            >
-              <FileDown className="w-5 h-5 group-hover:animate-bounce" />
-              <div className="text-right">
-                <span className="block text-xs text-slate-300 font-normal">المطبوعة المرجعية الرسمية</span>
-                <span className="block font-bold text-sm">تحميل مطبوعة د. ضيف شعيب (PDF)</span>
-              </div>
-            </a>
           </div>
         </div>
       </div>

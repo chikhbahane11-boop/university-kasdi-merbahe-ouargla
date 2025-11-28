@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { LayoutList, FileText, FileDown, ExternalLink, Lock, CheckCircle2, AlertCircle, BarChart3 } from 'lucide-react';
+import { LayoutList, FileText, ExternalLink, Lock, CheckCircle2, AlertCircle, BarChart3 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const StageConclusion: React.FC = () => {
@@ -37,16 +37,6 @@ const StageConclusion: React.FC = () => {
                <h2 className="text-xl font-bold">الملخص الشامل: الشركات التجارية</h2>
              </div>
            </div>
-           
-           <a 
-             href="http://dspace.univ-djelfa.dz:8080/xmlui/bitstream/handle/112/6946/%D9%85%D8%AD%D8%A7%D8%B6%D8%B1%D8%A7%D8%AA%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%B4%D8%B1%D9%83%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AC%D8%A7%D8%B1%D9%8A%D8%A9.pdf"
-             target="_blank"
-             rel="noopener noreferrer"
-             className="flex items-center gap-2 bg-white text-indigo-700 hover:bg-indigo-50 transition px-4 py-2 rounded-lg text-sm font-bold shadow-sm"
-           >
-             <FileDown className="w-4 h-4" />
-             تحميل المطبوعة (PDF)
-           </a>
         </div>
 
         {/* Tabs */}
