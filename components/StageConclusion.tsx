@@ -177,7 +177,7 @@ const StageConclusion: React.FC = () => {
           <div className="flex justify-between items-center mb-8 pb-4 border-b border-green-200">
             <h3 className="text-2xl font-bold text-green-900 flex items-center gap-2">
               <CheckCircle className="text-green-600" />
-              الأسئلة المتوقعة والإجابات النموذجية
+              المراجعة الشاملة (مدخل للشركات)
             </h3>
             <span className="text-sm text-green-600 bg-green-100 px-3 py-1 rounded-full">اضغط على السؤال للإجابة</span>
           </div>

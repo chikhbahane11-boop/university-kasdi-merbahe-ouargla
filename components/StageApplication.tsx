@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { RefreshCw, CheckCircle2, XCircle, Trophy, Scale, Users, Building2 } from 'lucide-react';
+import { RefreshCw, CheckCircle2, XCircle, Trophy, Users, Building2 } from 'lucide-react';
 
 const ITEMS_TO_SORT = [
   { id: '1', name: 'شركة التضامن', type: 'persons' },
