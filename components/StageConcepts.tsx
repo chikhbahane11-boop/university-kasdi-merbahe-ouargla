@@ -1,7 +1,8 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Coins, Briefcase, Building, Info, MousePointerClick, X } from 'lucide-react';
+import { Coins, Briefcase, Building, Info, MousePointerClick, Scale, BookOpen, Lightbulb } from 'lucide-react';
+import { THINKING_QUESTIONS } from '../constants';
 
 const StageConcepts: React.FC = () => {
   // Contributions State
@@ -75,7 +76,124 @@ const StageConcepts: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. Contributions Visualizer (Arkan) */}
+      {/* 2. Conceptual Distinction: Civil vs Commercial */}
+      <section className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+        <div className="bg-indigo-600 p-6 text-white flex items-center gap-3">
+          <Scale className="w-8 h-8" />
+          <h2 className="text-2xl font-bold">التمييز: الشركة المدنية vs التجارية</h2>
+        </div>
+        
+        <div className="p-8 grid md:grid-cols-2 gap-8">
+          {/* Civil Company */}
+          <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+            <h3 className="text-xl font-bold text-slate-800 mb-4 border-b pb-2 border-slate-200">الشركة المدنية</h3>
+            <ul className="space-y-3 text-slate-600 text-sm leading-relaxed">
+              <li className="flex gap-2">
+                <span className="text-indigo-500 font-bold">•</span>
+                <span>تخضع للقانون المدني (المواد 416-449).</span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-indigo-500 font-bold">•</span>
+                <span><strong>المعيار الموضوعي:</strong> تمارس نشاطاً مدنياً (فلاحة، مهن حرة، تعليم، عقار).</span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-indigo-500 font-bold">•</span>
+                <span>لا يكتسب الشركاء صفة التاجر.</span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-indigo-500 font-bold">•</span>
+                <span>لا تخضع لنظام الإفلاس التجاري بل لنظام الإعسار المدني.</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Commercial Company */}
+          <div className="bg-indigo-50 p-6 rounded-2xl border border-indigo-100">
+            <h3 className="text-xl font-bold text-indigo-900 mb-4 border-b pb-2 border-indigo-200">الشركة التجارية</h3>
+            <ul className="space-y-3 text-indigo-800 text-sm leading-relaxed">
+              <li className="flex gap-2">
+                <span className="text-indigo-600 font-bold">•</span>
+                <span>تخضع للقانون التجاري (المواد 544 وما يليها).</span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-indigo-600 font-bold">•</span>
+                <span><strong>المعيار الشكلي (م 544):</strong> تعتبر تجارية بمجرد اتخاذ الشكل (SNC, SPA, SARL) مهما كان نشاطها.</span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-indigo-600 font-bold">•</span>
+                <span>تكتسب الشخصية المعنوية بالقيد في السجل التجاري.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Critical Thinking 1 */}
+        <div className="bg-yellow-50 border-t border-yellow-100 p-6 flex gap-4 items-start">
+          <div className="bg-yellow-200 p-2 rounded-lg text-yellow-700">
+            <Lightbulb className="w-6 h-6" />
+          </div>
+          <div>
+            <h4 className="font-bold text-yellow-900 text-sm mb-1">سؤال للتفكير النقدي:</h4>
+            <p className="text-yellow-800 text-sm leading-relaxed">
+              {THINKING_QUESTIONS.definition.question}
+            </p>
+            <p className="text-xs text-yellow-600 mt-2 italic">تلميح: {THINKING_QUESTIONS.definition.hint}</p>
+          </div>
+        </div>
+        
+        <div className="bg-slate-100 p-3 text-center text-xs text-slate-500 font-medium">
+          المصدر: محاضرات في الشركات التجارية، ص 8-9.
+        </div>
+      </section>
+
+      {/* 3. Legal Nature: Contract vs Institution */}
+      <section className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+        <div className="bg-blue-600 p-6 text-white flex items-center gap-3">
+          <BookOpen className="w-8 h-8" />
+          <h2 className="text-2xl font-bold">الطبيعة القانونية: عقد أم نظام؟</h2>
+        </div>
+
+        <div className="p-8 space-y-8">
+          <div className="grid md:grid-cols-2 gap-8">
+             <div>
+                <h3 className="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">
+                  <span className="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs">1</span>
+                  النظرية العقدية
+                </h3>
+                <p className="text-slate-600 text-sm leading-relaxed mb-2">
+                  تعتبر الشركة "عقداً" يستند إلى سلطان الإرادة (المادة 416 مدني). 
+                </p>
+                <div className="bg-slate-50 p-3 rounded text-xs italic text-slate-500 border-r-2 border-blue-300">
+                  "العقد شريعة المتعاقدين..." (المادة 54 ق.م)
+                </div>
+                <p className="text-xs text-slate-400 mt-2">تظهر بوضوح في شركات الأشخاص (التضامن).</p>
+             </div>
+             <div>
+                <h3 className="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">
+                  <span className="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs">2</span>
+                  النظرية النظامية (المؤسسة)
+                </h3>
+                <p className="text-slate-600 text-sm leading-relaxed mb-2">
+                  تعتبر الشركة "نظاماً" (Institution) يخضع لقواعد قانونية آمرة تضعها الدولة. إرادة الشركاء تقتصر على الانضمام، لكن التسيير يخضع للقانون (حماية للغير).
+                </p>
+                <p className="text-xs text-slate-400">تظهر بوضوح في شركات الأموال (المساهمة).</p>
+             </div>
+          </div>
+
+          <div className="bg-slate-50 p-4 rounded-xl border-r-4 border-blue-500">
+            <h4 className="font-bold text-slate-800 mb-1">موقف المشرع الجزائري:</h4>
+            <p className="text-slate-600 text-sm">
+              أخذ بموقف <strong>مختلط</strong>. فالشركة تبدأ كـ "عقد" (يتطلب الرضا والأهلية في التأسيس)، ثم تتحول إلى "نظام" (شخص معنوي) بمجرد القيد في السجل التجاري، حيث تخضع لقواعد آمرة لا يملك الشركاء تغييرها.
+            </p>
+          </div>
+        </div>
+
+        <div className="bg-slate-100 p-3 text-center text-xs text-slate-500 font-medium">
+          المصدر: محاضرات في الشركات التجارية، ص 5-7.
+        </div>
+      </section>
+
+      {/* 4. Contributions Visualizer (Arkan) */}
       <section>
         <div className="flex items-center gap-4 mb-8">
           <div className="h-10 w-2 bg-amber-500 rounded-full"></div>
@@ -120,9 +238,23 @@ const StageConcepts: React.FC = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Critical Thinking 2 */}
+        <div className="bg-yellow-50 border-t border-yellow-100 p-6 flex gap-4 items-start mt-6 rounded-xl">
+          <div className="bg-yellow-200 p-2 rounded-lg text-yellow-700">
+            <Lightbulb className="w-6 h-6" />
+          </div>
+          <div>
+            <h4 className="font-bold text-yellow-900 text-sm mb-1">سؤال للتفكير النقدي:</h4>
+            <p className="text-yellow-800 text-sm leading-relaxed">
+              {THINKING_QUESTIONS.pillars.question}
+            </p>
+            <p className="text-xs text-yellow-600 mt-2 italic">تلميح: {THINKING_QUESTIONS.pillars.hint}</p>
+          </div>
+        </div>
       </section>
 
-      {/* 3. General Pillars (Quick View) */}
+      {/* 5. General Pillars (Quick View) */}
       <section className="bg-slate-50 rounded-3xl p-8 border border-slate-200">
         <h3 className="text-xl font-bold text-slate-900 mb-6 text-center">الأركان الموضوعية العامة (م 416 مدني)</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

@@ -1,9 +1,10 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, AlertTriangle, Send, Cloud, Coffee, School } from 'lucide-react';
+import { Briefcase, AlertTriangle, Send, Cloud, Coffee, School, BookOpen } from 'lucide-react';
 import SourceReader from './SourceReader';
 import GlossaryTerm from './GlossaryTerm';
+import { LECTURE_DATA } from '../constants';
 
 const MotionDiv = motion.div as any;
 
@@ -31,8 +32,8 @@ const StageIntro: React.FC = () => {
         <div className="relative z-10 space-y-6">
           {/* Ministry & University Info */}
           <div className="space-y-2 border-b border-slate-100 pb-6">
-            <h5 className="text-sm font-bold text-slate-600 font-serif">الجمهورية الجزائرية الديمقراطية الشعبية</h5>
-            <h5 className="text-sm font-bold text-slate-600 font-serif">وزارة التعليم العالي والبحث العلمي</h5>
+            <h5 className="text-lg md:text-xl font-bold text-slate-800 font-serif mb-2">{LECTURE_DATA.headerTitle}</h5>
+            <h5 className="text-base md:text-lg font-bold text-slate-600 font-serif">{LECTURE_DATA.ministry}</h5>
             
             <div className="flex flex-col items-center justify-center gap-2 mt-4 text-indigo-900">
               <div className="flex items-center gap-2">
@@ -43,7 +44,7 @@ const StageIntro: React.FC = () => {
             </div>
           </div>
 
-          {/* Module & Professor Info */}
+          {/* Module Info */}
           <div className="py-4 space-y-4">
             <div>
               <span className="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full mb-2 inline-block">سنة أولى - قانون أعمال</span>
@@ -53,11 +54,7 @@ const StageIntro: React.FC = () => {
               </h1>
             </div>
             
-            <div className="flex flex-col md:flex-row justify-center gap-4 mt-6">
-              <div className="bg-slate-50 px-6 py-3 rounded-xl border border-slate-200">
-                <span className="text-slate-400 text-xs block mb-1">إعداد الأستاذ</span>
-                <span className="text-slate-900 font-bold text-lg">الشيخ بن بحان</span>
-              </div>
+            <div className="flex justify-center mt-6">
               <div className="bg-slate-50 px-6 py-3 rounded-xl border border-slate-200">
                 <span className="text-slate-400 text-xs block mb-1">الموسم الدراسي</span>
                 <span className="text-slate-900 font-bold text-lg">2025 / 2026</span>
@@ -67,7 +64,29 @@ const StageIntro: React.FC = () => {
         </div>
       </div>
 
-      {/* 1. Warm-up: Word Cloud Simulation */}
+      {/* 1. Interactive Objectives Cards */}
+      <section>
+        <div className="flex items-center gap-3 mb-6">
+          <div className="p-2 bg-blue-600 rounded-lg text-white">
+            <BookOpen size={24} />
+          </div>
+          <h3 className="text-2xl font-bold text-slate-800">أهداف المحاضرة</h3>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {LECTURE_DATA.objectives.map((goal, idx) => (
+            <div key={idx} className="group bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:border-blue-500 hover:shadow-lg transition-all duration-300 cursor-default transform hover:-translate-y-1">
+              <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                <goal.icon size={24} />
+              </div>
+              <h4 className="text-lg font-bold text-slate-900 mb-2">{goal.title}</h4>
+              <p className="text-slate-500 text-sm leading-relaxed">{goal.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 2. Warm-up: Word Cloud Simulation */}
       <div className="text-center space-y-6 bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
         <div className="flex items-center justify-center gap-3 mb-4">
           <Cloud className="w-10 h-10 text-sky-500" />
@@ -112,7 +131,7 @@ const StageIntro: React.FC = () => {
         )}
       </div>
 
-      {/* 2. Narrative: The Cafe Scenario (Hook) */}
+      {/* 3. Narrative: The Cafe Scenario (Hook) */}
       <div className="bg-slate-50 p-8 rounded-2xl border border-slate-200 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-24 h-24 bg-amber-100 rounded-br-full opacity-50"></div>
         <div className="relative z-10">
@@ -131,15 +150,15 @@ const StageIntro: React.FC = () => {
         </div>
       </div>
 
-      {/* 3. The Hook: "What If" Scenario */}
-      <div className="grid md:grid-cols-2 gap-8 items-center">
+      {/* 4. The Hook: "What If" Scenario */}
+      <div className="grid md:grid-cols-1 gap-8 items-center">
         <MotionDiv 
           className="bg-rose-50 border-2 border-rose-200 rounded-2xl p-8 shadow-lg cursor-pointer hover:bg-rose-100 transition-colors group"
           onClick={() => setRevealed(true)}
         >
           {!revealed ? (
-            <div className="flex flex-col items-center justify-center h-64 text-center space-y-4">
-              <AlertTriangle className="w-16 h-16 text-rose-500 animate-bounce" />
+            <div className="flex flex-col items-center justify-center h-40 text-center space-y-4">
+              <AlertTriangle className="w-12 h-12 text-rose-500 animate-bounce" />
               <h3 className="text-2xl font-bold text-rose-900 group-hover:scale-105 transition-transform">تحدي الفهم</h3>
               <p className="text-rose-800 font-medium">انقر لتكتشف: ماذا لو أخطأوا في اختيار نوع الشركة؟</p>
             </div>
@@ -147,7 +166,7 @@ const StageIntro: React.FC = () => {
             <MotionDiv 
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="space-y-4 text-right h-64 overflow-y-auto custom-scrollbar"
+              className="space-y-4 text-right overflow-y-auto custom-scrollbar"
             >
               <h3 className="text-xl font-bold text-rose-900 border-b border-rose-200 pb-2 mb-2">مخاطر الاختيار الخاطئ:</h3>
               <ul className="space-y-3 text-rose-800 list-disc list-inside text-sm font-medium">
@@ -161,28 +180,6 @@ const StageIntro: React.FC = () => {
             </MotionDiv>
           )}
         </MotionDiv>
-
-        {/* Objectives */}
-        <div className="bg-white rounded-2xl p-8 shadow-md border border-slate-100 h-full flex flex-col justify-center">
-          <h3 className="text-xl font-bold text-indigo-900 mb-6 flex items-center gap-2">
-            <Briefcase className="w-6 h-6" />
-            أهداف المحاضرة (90 دقيقة)
-          </h3>
-          <ul className="space-y-4">
-            <li className="flex items-center gap-3">
-              <span className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center font-bold text-slate-600">1</span>
-              <span className="text-slate-700">التمييز الدقيق بين الشركة المدنية والتجارية (حسب القانون الجزائري).</span>
-            </li>
-            <li className="flex items-center gap-3">
-              <span className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center font-bold text-slate-600">2</span>
-              <span className="text-slate-700">استيعاب أنواع الشركات (تضامن، مساهمة، محدودة) والفرق بينها.</span>
-            </li>
-            <li className="flex items-center gap-3">
-              <span className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center font-bold text-slate-600">3</span>
-              <span className="text-slate-700">تطبيق المعرفة على حالات واقعية محلية.</span>
-            </li>
-          </ul>
-        </div>
       </div>
 
       {/* Contextual Source Reader */}

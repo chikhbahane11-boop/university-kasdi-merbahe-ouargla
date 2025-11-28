@@ -64,7 +64,7 @@ const App: React.FC = () => {
                  <School className="w-8 h-8 text-amber-500" />
                  <h1 className="text-2xl font-extrabold text-slate-900">الشركات التجارية</h1>
                </div>
-               <p className="text-sm text-slate-500 font-medium">محاضرة تفاعلية - د. ضيف شعيب</p>
+               <p className="text-sm text-slate-500 font-medium text-right">محاضرة تفاعلية</p>
              </div>
 
              <nav className="space-y-3 flex-1">
@@ -104,17 +104,6 @@ const App: React.FC = () => {
                     ></div>
                     </div>
                 </div>
-
-                {/* Download Brochure Button */}
-                <a 
-                  href="https://share.google/q98lJPAxCt330mH9g"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-3 w-full bg-amber-500 hover:bg-amber-600 text-white px-4 py-3 rounded-xl font-bold shadow-md shadow-amber-200 transition-all transform hover:-translate-y-1"
-                >
-                  <FileDown className="w-5 h-5" />
-                  <span>تحميل المطبوعة</span>
-                </a>
              </div>
           </div>
         </aside>

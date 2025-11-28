@@ -1,17 +1,22 @@
 
 import React, { useState } from 'react';
-import { LayoutList, FileText, ExternalLink, Lock, CheckCircle2, AlertCircle, BarChart3 } from 'lucide-react';
+import { LayoutList, FileText, FileDown, ExternalLink, Lock, CheckCircle2, AlertCircle, BarChart3, CheckCircle, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { LOCKED_QUESTIONS } from '../constants';
 
 const StageConclusion: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'concepts' | 'classification' | 'nature'>('concepts');
   const [showAdmin, setShowAdmin] = useState(false);
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  
+  // Review Section Lock State
+  const [isReviewLocked, setIsReviewLocked] = useState(true);
+  const [reviewCode, setReviewCode] = useState('');
+  const [reviewError, setReviewError] = useState('');
 
   // الروابط
   const STUDENT_FORM_LINK = "https://forms.gle/ZHXAnYn81c4DjEad6";
-  // ملاحظة: هذا الرابط يجب استبداله برابط "الردود" أو ملف Excel الخاص بك كأستاذ
   const TEACHER_RESPONSES_LINK = "https://docs.google.com/forms/u/0/"; 
 
   const handleAdminLogin = (e: React.FormEvent) => {
@@ -22,6 +27,16 @@ const StageConclusion: React.FC = () => {
       setPassword('');
     } else {
       setError('كلمة المرور غير صحيحة');
+    }
+  };
+
+  const handleUnlockReview = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (reviewCode.trim() === 'omar 2016') {
+        setIsReviewLocked(false);
+        setReviewError('');
+    } else {
+        setReviewError('⚠️ كود غير صحيح');
     }
   };
 
@@ -37,6 +52,16 @@ const StageConclusion: React.FC = () => {
                <h2 className="text-xl font-bold">الملخص الشامل: الشركات التجارية</h2>
              </div>
            </div>
+           
+           <a 
+             href="http://dspace.univ-djelfa.dz:8080/xmlui/bitstream/handle/112/6946/%D9%85%D8%AD%D8%A7%D8%B6%D8%B1%D8%A7%D8%AA%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%B4%D8%B1%D9%83%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%AC%D8%A7%D8%B1%D9%8A%D8%A9.pdf"
+             target="_blank"
+             rel="noopener noreferrer"
+             className="flex items-center gap-2 bg-white text-indigo-700 hover:bg-indigo-50 transition px-4 py-2 rounded-lg text-sm font-bold shadow-sm"
+           >
+             <FileDown className="w-4 h-4" />
+             تحميل الملخص (PDF)
+           </a>
         </div>
 
         {/* Tabs */}
@@ -57,7 +82,7 @@ const StageConclusion: React.FC = () => {
              onClick={() => setActiveTab('classification')}
              className={`flex-1 min-w-[120px] py-4 text-sm font-bold transition-colors ${activeTab === 'classification' ? 'text-indigo-700 border-b-2 border-indigo-600 bg-white' : 'text-slate-500 hover:text-slate-700'}`}
            >
-             3. معايير التصنيف (مهم)
+             3. معايير التصنيف
            </button>
         </div>
 
@@ -77,14 +102,13 @@ const StageConclusion: React.FC = () => {
                 <div className="grid md:grid-cols-2 gap-4">
                    <div className="border border-slate-200 p-4 rounded-lg">
                       <h4 className="font-bold text-slate-800 mb-2">النظرية العقدية</h4>
-                      <p className="text-sm text-slate-600">الشركة "عقد" يستند لإرادة الأطراف. تسود في شركات الأشخاص (التضامن).</p>
+                      <p className="text-sm text-slate-600">الشركة "عقد" يستند لإرادة الأطراف. تسود في شركات الأشخاص.</p>
                    </div>
                    <div className="border border-slate-200 p-4 rounded-lg">
                       <h4 className="font-bold text-slate-800 mb-2">النظرية النظامية</h4>
-                      <p className="text-sm text-slate-600">الشركة "نظام" (Institution) يخضع لقواعد آمرة من الدولة. تسود في شركات الأموال.</p>
+                      <p className="text-sm text-slate-600">الشركة "نظام" يخضع لقواعد آمرة. تسود في شركات الأموال.</p>
                    </div>
                 </div>
-                <p className="text-xs text-center text-slate-400 mt-2">المشرع الجزائري أخذ بالموقف المختلط: تأسيس عقدي وحياة نظامية.</p>
              </motion.div>
            )}
 
@@ -103,7 +127,7 @@ const StageConclusion: React.FC = () => {
                     <div className="bg-sky-100 text-sky-600 font-bold p-2 rounded">SARL</div>
                     <div>
                       <h4 className="font-bold text-slate-800">المسؤولية المحدودة (م 564)</h4>
-                      <p className="text-sm text-slate-600">شركة مختلطة. مسؤولية محدودة بالحصص. لا يكتسب الشريك صفة التاجر.</p>
+                      <p className="text-sm text-slate-600">شركة مختلطة. مسؤولية محدودة بالحصص.</p>
                     </div>
                   </div>
 
@@ -132,23 +156,18 @@ const StageConclusion: React.FC = () => {
                     <tbody className="divide-y divide-slate-100">
                       <tr>
                         <td className="p-3 font-bold bg-slate-50/50">الموضوع (النشاط)</td>
-                        <td className="p-3">مدني: فلاحة، مهن حرة (طب، محاماة)، تعليم، حرف.</td>
-                        <td className="p-3">تجاري: شراء لأجل البيع، صناعة، نقل، بنوك، تأمين.</td>
+                        <td className="p-3">مدني: فلاحة، مهن حرة، تعليم.</td>
+                        <td className="p-3">تجاري: شراء لأجل البيع، صناعة، بنوك.</td>
                       </tr>
                       <tr>
                         <td className="p-3 font-bold bg-slate-50/50">الشكل (المادة 544)</td>
-                        <td className="p-3">لا يوجد شكل محدد، غالباً شركة مدنية مهنية.</td>
-                        <td className="p-3 font-bold text-indigo-700">تجارية بحكم الشكل: SNC, SCS, SARL, SPA.</td>
+                        <td className="p-3">لا يوجد شكل محدد.</td>
+                        <td className="p-3 font-bold text-indigo-700">تجارية بحكم الشكل: SNC, SARL, SPA.</td>
                       </tr>
                       <tr>
                         <td className="p-3 font-bold bg-slate-50/50">صفة التاجر</td>
-                        <td className="p-3">لا تكتسبها الشركة ولا الشركاء.</td>
-                        <td className="p-3">تكتسبها الشركة دائماً (والشركاء في التضامن).</td>
-                      </tr>
-                      <tr>
-                        <td className="p-3 font-bold bg-slate-50/50">الإفلاس</td>
-                        <td className="p-3">تخضع للإعسار المدني.</td>
-                        <td className="p-3">تخضع لنظام الإفلاس التجاري.</td>
+                        <td className="p-3">لا تكتسبها الشركة.</td>
+                        <td className="p-3">تكتسبها الشركة دائماً.</td>
                       </tr>
                     </tbody>
                   </table>
@@ -158,9 +177,72 @@ const StageConclusion: React.FC = () => {
         </div>
       </div>
 
-      {/* 2. Exit Ticket Section (Links) */}
+      {/* 2. Password Protected Review Section */}
+      <div className="relative">
+          {isReviewLocked ? (
+            <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-12 text-center text-white shadow-2xl">
+              <div className="w-16 h-16 bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Lock size={32} className="text-blue-400" />
+              </div>
+              <h3 className="text-2xl font-bold mb-2">المراجعة الشاملة (منطقة مغلقة)</h3>
+              <p className="text-slate-400 mb-8">أدخل كود المحاضرة للوصول إلى الأسئلة المتوقعة.</p>
+              
+              <form onSubmit={handleUnlockReview} className="max-w-sm mx-auto relative">
+                <input 
+                  type="password" 
+                  placeholder="أدخل الكود هنا..."
+                  className="w-full px-5 py-4 rounded-xl bg-slate-700 border border-slate-600 text-white text-center focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+                  value={reviewCode}
+                  onChange={(e) => setReviewCode(e.target.value)}
+                />
+                <button 
+                  type="submit"
+                  className="w-full mt-4 bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl transition-colors shadow-lg shadow-blue-900/50"
+                >
+                  فتح القفل 🔓
+                </button>
+                {reviewError && (
+                  <p className="text-red-400 text-sm mt-4 bg-red-900/20 py-2 rounded animate-pulse">
+                    {reviewError}
+                  </p>
+                )}
+              </form>
+            </div>
+          ) : (
+            <div className="bg-green-50 rounded-3xl p-8 border-2 border-green-100 animate-fade-in">
+              <div className="flex justify-between items-center mb-8 pb-4 border-b border-green-200">
+                <h3 className="text-2xl font-bold text-green-900 flex items-center gap-2">
+                  <CheckCircle className="text-green-600" />
+                  الأسئلة المتوقعة والإجابات النموذجية
+                </h3>
+                <button 
+                  onClick={() => setIsReviewLocked(true)}
+                  className="text-sm font-bold text-green-700 hover:bg-green-100 px-3 py-1 rounded-lg transition"
+                >
+                  إعادة القفل 🔒
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                {LOCKED_QUESTIONS.map((item, i) => (
+                  <details key={i} className="bg-white border border-green-100 rounded-xl overflow-hidden group">
+                    <summary className="flex justify-between items-center p-5 cursor-pointer font-bold text-slate-800 hover:bg-green-50/50 transition">
+                      <span>{item.q}</span>
+                      <ChevronDown className="text-slate-400 group-open:rotate-180 transition-transform" />
+                    </summary>
+                    <div className="p-5 pt-0 text-slate-600 leading-relaxed bg-green-50/30 border-t border-green-50">
+                      <span className="font-bold text-green-700">الإجابة النموذجية: </span>
+                      {item.a}
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </div>
+          )}
+      </div>
+
+      {/* 3. Exit Ticket Section (Links) */}
       <div className="grid md:grid-cols-2 gap-8">
-        
         {/* Student Card */}
         <div className="bg-white p-8 rounded-2xl shadow-lg border border-slate-200 text-center flex flex-col items-center justify-center space-y-6 hover:shadow-xl transition-shadow">
           <div className="bg-emerald-100 p-4 rounded-full text-emerald-600">
@@ -239,8 +321,26 @@ const StageConclusion: React.FC = () => {
             </motion.form>
           )}
         </div>
-
       </div>
+
+      {/* 4. Final Footer Summary */}
+      <footer className="bg-blue-900 text-white rounded-3xl p-8 md:p-12 text-center md:text-right">
+          <h2 className="text-2xl font-bold mb-6 border-b border-blue-700 pb-4 inline-block">
+            خاتمة
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-blue-100 leading-relaxed text-sm md:text-base">
+            <p>
+              نستنتج أن <strong>الشركة التجارية</strong> في التشريع الجزائري هي نظام قانوني مركب يجمع بين الإرادة (العقد) والتنظيم (القانون). تكتسب صفتها التجارية إما بالموضوع (طبيعة النشاط) أو بالشكل (المساهمة، التضامن، SARL) طبقاً للمادة 544.
+            </p>
+            <p>
+              تأسيس الشركة يتطلب توافر أركان موضوعية عامة (الرضا، المحل، السبب، الأهلية) وأركان خاصة (تعدد الشركاء، تقديم الحصص، نية المشاركة) بالإضافة للأركان الشكلية الجوهرية (الكتابة الرسمية والنشر).
+            </p>
+          </div>
+          <div className="mt-8 text-xs text-blue-400 text-center">
+            © 2025 جميع الحقوق محفوظة - قسم قانون الأعمال
+          </div>
+      </footer>
+
     </div>
   );
 };
