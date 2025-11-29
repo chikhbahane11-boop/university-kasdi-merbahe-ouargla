@@ -208,11 +208,11 @@ const StageConcepts: React.FC = () => {
           <div className="bg-slate-50 rounded-3xl p-8 border border-slate-200">
             <h3 className="text-xl font-bold text-slate-900 mb-6 text-center border-b border-slate-200 pb-3">1. الأركان الموضوعية العامة (م 416 مدني)</h3>
             <div className="grid grid-cols-2 gap-4">
-              {['الرضـا', 'الأهليـة', 'المحــل', 'السبــب'].map((pillar, idx) => (
-                <div key={idx} className="bg-white p-4 rounded-xl text-center shadow-sm border border-slate-100 hover:border-amber-400 transition-colors">
-                  <span className="font-bold text-slate-700">{pillar}</span>
-                </div>
-              ))}
+              {/* Interactive General Pillars */}
+              <Tooltip word="الرضـا" content="يجب أن يكون الرضا موجوداً وصحيحاً (خالياً من عيوب الإرادة كالغلط والتدليس) ومنصباً على بنود العقد." />
+              <Tooltip word="الأهليـة" content="يجب أن يكون الشريك أهلاً للتعاقد (19 سنة). في شركات التضامن يشترط الأهلية التجارية." />
+              <Tooltip word="المحــل" content="هو النشاط الذي تمارسه الشركة. يجب أن يكون مشروعاً وممكناً وغير مخالف للنظام العام." />
+              <Tooltip word="السبــب" content="هو الباعث الدافع للتعاقد، وهو تحقيق الربح المشروع." />
             </div>
           </div>
 
@@ -316,7 +316,7 @@ const Tooltip = ({ word, content }: { word: string, content: string }) => {
   return (
     <span className="relative inline-block mx-1">
       <span 
-        className="text-amber-400 font-bold cursor-pointer border-b-2 border-amber-400/30 hover:bg-amber-400/10 hover:border-amber-400 transition-colors px-1 rounded"
+        className="text-amber-400 font-bold cursor-pointer border-b-2 border-amber-400/30 hover:bg-amber-400/10 hover:border-amber-400 transition-colors px-1 rounded block text-center p-2 bg-white shadow-sm"
         onMouseEnter={() => setShow(true)}
         onMouseLeave={() => setShow(false)}
         onClick={() => setShow(!show)}
