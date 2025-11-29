@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Coins, Briefcase, Building, Info, MousePointerClick, Scale, BookOpen, Lightbulb } from 'lucide-react';
+import { Coins, Briefcase, Building, Info, MousePointerClick, Scale, BookOpen, Lightbulb, Users, HeartHandshake } from 'lucide-react';
 import { THINKING_QUESTIONS } from '../constants';
 
 const StageConcepts: React.FC = () => {
@@ -193,16 +192,68 @@ const StageConcepts: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. Contributions Visualizer (Arkan) */}
+      {/* 4. Pillars of the Company Contract */}
       <section>
         <div className="flex items-center gap-4 mb-8">
           <div className="h-10 w-2 bg-amber-500 rounded-full"></div>
           <div>
-            <h2 className="text-3xl font-extrabold text-slate-900">أركان الشركة: الحصص</h2>
-            <p className="text-slate-500">لا شركة بدون تقديم حصة (نقدية، عينية، أو عمل)</p>
+            <h2 className="text-3xl font-extrabold text-slate-900">أركان عقد الشركة</h2>
+            <p className="text-slate-500">لا تقوم الشركة إلا بتوافر أركان موضوعية (عامة وخاصة) وشكلية</p>
           </div>
         </div>
 
+        <div className="grid md:grid-cols-2 gap-8 mb-8">
+          
+          {/* General Pillars */}
+          <div className="bg-slate-50 rounded-3xl p-8 border border-slate-200">
+            <h3 className="text-xl font-bold text-slate-900 mb-6 text-center border-b border-slate-200 pb-3">1. الأركان الموضوعية العامة (م 416 مدني)</h3>
+            <div className="grid grid-cols-2 gap-4">
+              {['الرضـا', 'الأهليـة', 'المحــل', 'السبــب'].map((pillar, idx) => (
+                <div key={idx} className="bg-white p-4 rounded-xl text-center shadow-sm border border-slate-100 hover:border-amber-400 transition-colors">
+                  <span className="font-bold text-slate-700">{pillar}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Specific Pillars */}
+          <div className="bg-indigo-50 rounded-3xl p-8 border border-indigo-100">
+            <h3 className="text-xl font-bold text-indigo-900 mb-6 text-center border-b border-indigo-200 pb-3">2. الأركان الموضوعية الخاصة</h3>
+            <div className="space-y-4">
+              <div className="bg-white p-4 rounded-xl shadow-sm border border-indigo-100 flex items-center gap-3">
+                <div className="bg-indigo-100 p-2 rounded-lg text-indigo-600">
+                  <Users className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-800 text-sm">تعدد الشركاء</h4>
+                  <p className="text-xs text-slate-500">الأصل هو التعدد (شخصين أو أكثر). الاستثناء: EURL و SAS (شريك وحيد).</p>
+                </div>
+              </div>
+              
+              <div className="bg-white p-4 rounded-xl shadow-sm border border-indigo-100 flex items-center gap-3">
+                <div className="bg-indigo-100 p-2 rounded-lg text-indigo-600">
+                  <HeartHandshake className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-800 text-sm">نية المشاركة (Affectio Societatis)</h4>
+                  <p className="text-xs text-slate-500">الرغبة في التعاون والمساواة وتحمل المخاطر (تمييزاً عن عقد العمل).</p>
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-xl shadow-sm border border-indigo-100 flex items-center gap-3">
+                <div className="bg-indigo-100 p-2 rounded-lg text-indigo-600">
+                  <Coins className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-800 text-sm">تقديم الحصص</h4>
+                  <p className="text-xs text-slate-500">أنظر التفاصيل أدناه (نقدية، عينية، صناعية).</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Contributions Details */}
         <div className="grid md:grid-cols-3 gap-6">
           {contributions.map((item) => (
             <motion.div
@@ -251,18 +302,6 @@ const StageConcepts: React.FC = () => {
             </p>
             <p className="text-xs text-yellow-600 mt-2 italic">تلميح: {THINKING_QUESTIONS.pillars.hint}</p>
           </div>
-        </div>
-      </section>
-
-      {/* 5. General Pillars (Quick View) */}
-      <section className="bg-slate-50 rounded-3xl p-8 border border-slate-200">
-        <h3 className="text-xl font-bold text-slate-900 mb-6 text-center">الأركان الموضوعية العامة (م 416 مدني)</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {['الرضـا', 'الأهليـة', 'المحــل', 'السبــب'].map((pillar, idx) => (
-            <div key={idx} className="bg-white p-4 rounded-xl text-center shadow-sm border border-slate-100 hover:border-amber-400 transition-colors">
-              <span className="font-bold text-slate-700">{pillar}</span>
-            </div>
-          ))}
         </div>
       </section>
 
