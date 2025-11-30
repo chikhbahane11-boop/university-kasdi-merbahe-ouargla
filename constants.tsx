@@ -1,6 +1,6 @@
 
 import { TimelineEvent, QuizQuestion } from './types';
-import { BookOpen, Users, Gavel, Briefcase, Building2, Scale, ShieldCheck } from 'lucide-react';
+import { BookOpen, Users, Building2, Scale, ShieldCheck } from 'lucide-react';
 
 export const LECTURE_DATA = {
   headerTitle: "الجمهورية الجزائرية الديمقراطية الشعبية",

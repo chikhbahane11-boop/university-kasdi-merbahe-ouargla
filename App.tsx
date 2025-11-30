@@ -1,7 +1,7 @@
 
-import React, { useState } from 'react';
-import { Stage, NavItem } from './types';
-import { BookOpen, History, Lightbulb, GraduationCap, MessageCircle, Menu, X, FileDown, School } from 'lucide-react';
+import React, { useState } from 'react'; 
+import { Stage, NavItem } from './types'; 
+import { BookOpen, History, Lightbulb, GraduationCap, MessageCircle, Menu, X, School } from 'lucide-react'; 
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Components
