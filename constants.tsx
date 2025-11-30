@@ -1,6 +1,10 @@
-
 import { TimelineEvent, QuizQuestion } from './types';
-import { BookOpen, Users, Gavel, Briefcase, Building2, Scale, ShieldCheck } from 'lucide-react';
+// لاحظ: حذفت BookOpen و Gavel و Briefcase لأننا لا نستخدمها كـ "مكونات" هنا، بل نستخدم أسماءها كنصوص فقط أو لم نستخدمها أصلاً
+import { Users, Building2, Scale, ShieldCheck } from 'lucide-react';
+
+// --- البيانات الثابتة ---
+
+export const HANDOUT_URL = "https://share.google/bPi1DkwNU5bV1mUcd";
 
 export const LECTURE_DATA = {
   headerTitle: "الجمهورية الجزائرية الديمقراطية الشعبية",
