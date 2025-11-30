@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { LayoutList, FileText, FileDown, ExternalLink, Lock, CheckCircle2, AlertCircle, BarChart3, CheckCircle, ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { LOCKED_QUESTIONS } from '../constants';
 
 const StageConclusion: React.FC = () => {
@@ -9,7 +9,6 @@ const StageConclusion: React.FC = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   
-  // الروابط
   const STUDENT_FORM_LINK = "https://forms.gle/ZHXAnYn81c4DjEad6";
   const TEACHER_RESPONSES_LINK = "https://docs.google.com/forms/u/0/"; 
 
@@ -173,7 +172,7 @@ const StageConclusion: React.FC = () => {
 
       {/* 2. Review Section (Unlocked for Students) */}
       <div className="relative">
-        <div className="bg-green-50 rounded-3xl p-8 border-2 border-green-100 animate-fade-in">
+        <div className="bg-green-50 rounded-3xl p-8 border-2 border-green-100 animate-in fade-in">
           <div className="flex justify-between items-center mb-8 pb-4 border-b border-green-200">
             <h3 className="text-2xl font-bold text-green-900 flex items-center gap-2">
               <CheckCircle className="text-green-600" />
@@ -201,7 +200,6 @@ const StageConclusion: React.FC = () => {
 
       {/* 3. Exit Ticket Section (Links) */}
       <div className="grid md:grid-cols-2 gap-8">
-        {/* Student Card */}
         <div className="bg-white p-8 rounded-2xl shadow-lg border border-slate-200 text-center flex flex-col items-center justify-center space-y-6 hover:shadow-xl transition-shadow">
           <div className="bg-emerald-100 p-4 rounded-full text-emerald-600">
             <CheckCircle2 className="w-12 h-12" />
@@ -221,7 +219,6 @@ const StageConclusion: React.FC = () => {
           </a>
         </div>
 
-        {/* Teacher Card */}
         <div className="bg-slate-50 p-8 rounded-2xl border border-slate-200 flex flex-col justify-center">
           <div className="flex items-center gap-3 mb-6">
             <div className="bg-slate-200 p-2 rounded-lg text-slate-600">

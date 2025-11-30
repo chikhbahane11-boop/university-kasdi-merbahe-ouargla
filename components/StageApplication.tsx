@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RefreshCw, CheckCircle2, XCircle, Trophy, Users, Building2 } from 'lucide-react';
@@ -9,7 +8,7 @@ const ITEMS_TO_SORT = [
   { id: '3', name: 'شركة التوصية البسيطة', type: 'persons' },
   { id: '4', name: 'شركة المساهمة البسيطة', type: 'capital' },
   { id: '5', name: 'شركة المحاصة', type: 'persons' },
-  { id: '6', name: 'SARL (طابع مختلط يميل للأموال)', type: 'capital' }, // Simplified for binary game logic
+  { id: '6', name: 'SARL (طابع مختلط يميل للأموال)', type: 'capital' },
 ];
 
 const StageApplication: React.FC = () => {
@@ -29,9 +28,6 @@ const StageApplication: React.FC = () => {
     const item = items.find(i => i.id === selectedItem);
     if (!item) return;
 
-    // Check Logic (Special case for SARL, usually mixed but often grouped with capital in broad sense or kept separate. Here assuming Capital for game simplicity or we can reject both)
-    // Actually SARL is mixed. Let's accept it in Capital for this binary game context or allow both.
-    // Strict logic:
     const isCorrect = (item.type === binType) || (item.name.includes('SARL') && binType === 'capital'); 
 
     if (isCorrect) {

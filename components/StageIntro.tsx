@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, AlertTriangle, Send, Cloud, Coffee, School, BookOpen } from 'lucide-react';
+import { AlertTriangle, Send, Cloud, Coffee, School, BookOpen } from 'lucide-react';
 import SourceReader from './SourceReader';
 import GlossaryTerm from './GlossaryTerm';
 import { LECTURE_DATA } from '../constants';
@@ -24,13 +23,11 @@ const StageIntro: React.FC = () => {
   return (
     <div className="space-y-10">
       
-      {/* 0. Official Header (Cover Page) */}
+      {/* 0. Official Header */}
       <div className="bg-white p-8 rounded-3xl shadow-lg border-t-8 border-indigo-900 text-center relative overflow-hidden mb-10">
-        {/* Background Pattern */}
         <div className="absolute top-0 left-0 w-full h-full opacity-5 bg-[radial-gradient(#4f46e5_1px,transparent_1px)] [background-size:16px_16px]"></div>
 
         <div className="relative z-10 space-y-6">
-          {/* Ministry & University Info */}
           <div className="space-y-2 border-b border-slate-100 pb-6">
             <h5 className="text-lg md:text-xl font-bold text-slate-800 font-serif mb-2">{LECTURE_DATA.headerTitle}</h5>
             <h5 className="text-base md:text-lg font-bold text-slate-600 font-serif">{LECTURE_DATA.ministry}</h5>
@@ -44,7 +41,6 @@ const StageIntro: React.FC = () => {
             </div>
           </div>
 
-          {/* Module Info */}
           <div className="py-4 space-y-4">
             <div>
               <span className="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full mb-2 inline-block">سنة أولى - قانون أعمال</span>
@@ -86,7 +82,7 @@ const StageIntro: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. Warm-up: Word Cloud Simulation */}
+      {/* 2. Warm-up */}
       <div className="text-center space-y-6 bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
         <div className="flex items-center justify-center gap-3 mb-4">
           <Cloud className="w-10 h-10 text-sky-500" />
@@ -111,7 +107,6 @@ const StageIntro: React.FC = () => {
           </button>
         </form>
 
-        {/* Word Cloud Display */}
         {submittedWords.length > 0 && (
           <div className="flex flex-wrap justify-center gap-3 mt-6">
             {submittedWords.map((word, idx) => (
@@ -131,7 +126,7 @@ const StageIntro: React.FC = () => {
         )}
       </div>
 
-      {/* 3. Narrative: The Cafe Scenario (Hook) */}
+      {/* 3. Narrative Hook */}
       <div className="bg-slate-50 p-8 rounded-2xl border border-slate-200 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-24 h-24 bg-amber-100 rounded-br-full opacity-50"></div>
         <div className="relative z-10">
@@ -150,7 +145,7 @@ const StageIntro: React.FC = () => {
         </div>
       </div>
 
-      {/* 4. The Hook: "What If" Scenario */}
+      {/* 4. What If */}
       <div className="grid md:grid-cols-1 gap-8 items-center">
         <MotionDiv 
           className="bg-rose-50 border-2 border-rose-200 rounded-2xl p-8 shadow-lg cursor-pointer hover:bg-rose-100 transition-colors group"
@@ -182,7 +177,6 @@ const StageIntro: React.FC = () => {
         </MotionDiv>
       </div>
 
-      {/* Contextual Source Reader */}
       <SourceReader sectionKey="intro" />
     </div>
   );

@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, ChevronLeft, Users, Building2, Briefcase, User } from 'lucide-react';
+import { ChevronDown, Users, Building2, Briefcase } from 'lucide-react';
 
 const StageHistory: React.FC = () => {
   return (
