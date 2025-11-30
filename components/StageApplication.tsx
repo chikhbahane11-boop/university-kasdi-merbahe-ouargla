@@ -61,11 +61,7 @@ const StageApplication: React.FC = () => {
       </div>
 
       <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-200">
-        
-        {/* Game Area */}
         <div className="p-8 min-h-[500px] flex flex-col">
-          
-          {/* Deck of Cards */}
           <div className="flex-1 mb-12">
             {isGameComplete ? (
               <div className="text-center py-10 animate-in zoom-in duration-500">
@@ -115,9 +111,7 @@ const StageApplication: React.FC = () => {
             )}
           </div>
 
-          {/* Bins */}
           <div className="grid grid-cols-2 gap-8 mt-auto">
-            {/* Persons Bin */}
             <div 
               onClick={() => handleBinClick('persons')}
               className={`rounded-2xl border-4 border-dashed p-6 text-center transition-all cursor-pointer relative overflow-hidden ${
@@ -138,7 +132,6 @@ const StageApplication: React.FC = () => {
               </div>
             </div>
 
-            {/* Capital Bin */}
             <div 
               onClick={() => handleBinClick('capital')}
               className={`rounded-2xl border-4 border-dashed p-6 text-center transition-all cursor-pointer relative overflow-hidden ${

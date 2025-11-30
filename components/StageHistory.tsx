@@ -11,22 +11,17 @@ const StageHistory: React.FC = () => {
       </div>
 
       <div className="max-w-4xl mx-auto">
-        {/* Root Node */}
         <div className="flex flex-col items-center">
           <div className="bg-slate-900 text-white px-8 py-4 rounded-2xl shadow-xl border-4 border-slate-100 z-10 relative">
             <h3 className="text-xl font-bold">الشركات التجارية</h3>
             <span className="text-xs text-slate-400 block mt-1 text-center">المادة 544 وما يليها</span>
           </div>
           
-          {/* Vertical Line */}
           <div className="w-1 h-12 bg-slate-300"></div>
           
-          {/* Main Branches */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full relative">
-            {/* Horizontal Connector */}
             <div className="hidden md:block absolute top-0 left-1/4 right-1/4 h-1 bg-slate-300 -translate-y-full"></div>
 
-            {/* Branch 1: Persons Companies */}
             <TreeNode 
               title="شركات الأشخاص"
               subtitle="الاعتبار الشخصي"
@@ -39,7 +34,6 @@ const StageHistory: React.FC = () => {
               ]}
             />
 
-            {/* Branch 2: Capital Companies */}
             <TreeNode 
               title="شركات الأموال"
               subtitle="الاعتبار المالي"
@@ -53,7 +47,6 @@ const StageHistory: React.FC = () => {
             />
           </div>
 
-          {/* Hybrid Branch (Centered below) */}
           <div className="mt-12 w-full max-w-md">
              <div className="w-1 h-12 bg-slate-300 mx-auto -mt-12 relative z-0"></div>
              <TreeNode 

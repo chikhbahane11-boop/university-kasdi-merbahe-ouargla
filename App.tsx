@@ -1,6 +1,7 @@
+
 import React, { useState } from 'react';
 import { Stage, NavItem } from './types';
-import { BookOpen, History, Lightbulb, GraduationCap, MessageCircle, Menu, X, School } from 'lucide-react';
+import { BookOpen, History, Lightbulb, GraduationCap, MessageCircle, Menu, X, FileDown, School } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Components
@@ -41,9 +42,10 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-tajawal text-slate-900 selection:bg-amber-100 selection:text-slate-900 dir-rtl">
       
-      {/* Mobile Header */}
+      {/* Mobile Header - Fixed Menu Alignment to Right */}
       <div className="lg:hidden bg-white shadow-sm p-4 flex justify-between items-center sticky top-0 z-50">
         <h1 className="font-bold text-lg text-slate-900">مدخل للشركات التجارية</h1>
+        {/* Menu Button on the Right */}
         <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="text-slate-800 p-2 hover:bg-slate-100 rounded-lg transition">
           {isSidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -89,6 +91,7 @@ const App: React.FC = () => {
              </nav>
 
              <div className="space-y-6 mt-auto">
+                {/* Progress Bar */}
                 <div className="p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
                     <div className="flex justify-between items-center mb-2">
                         <span className="text-xs font-bold text-slate-400 uppercase">التقدم</span>
@@ -105,6 +108,7 @@ const App: React.FC = () => {
           </div>
         </aside>
 
+        {/* Overlay for mobile */}
         {isSidebarOpen && (
           <div 
             className="fixed inset-0 bg-slate-900/40 z-30 lg:hidden backdrop-blur-sm"
@@ -112,6 +116,7 @@ const App: React.FC = () => {
           ></div>
         )}
 
+        {/* Main Content Area */}
         <main className="flex-1 min-w-0">
           <AnimatePresence mode="wait">
             <MotionDiv

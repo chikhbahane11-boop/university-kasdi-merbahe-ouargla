@@ -4,7 +4,6 @@ import { Coins, Briefcase, Building, Info, MousePointerClick, Scale, BookOpen, L
 import { THINKING_QUESTIONS } from '../constants';
 
 const StageConcepts: React.FC = () => {
-  // Contributions State
   const [activeContribution, setActiveContribution] = useState<string | null>(null);
 
   const contributions = [
@@ -42,7 +41,6 @@ const StageConcepts: React.FC = () => {
         </div>
 
         <div className="bg-slate-900 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden text-center group">
-          {/* Background decoration */}
           <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400"></div>
           <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-slate-800 rounded-full opacity-50 blur-3xl"></div>
           
@@ -83,7 +81,6 @@ const StageConcepts: React.FC = () => {
         </div>
         
         <div className="p-8 grid md:grid-cols-2 gap-8">
-          {/* Civil Company */}
           <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
             <h3 className="text-xl font-bold text-slate-800 mb-4 border-b pb-2 border-slate-200">الشركة المدنية</h3>
             <ul className="space-y-3 text-slate-600 text-sm leading-relaxed">
@@ -106,7 +103,6 @@ const StageConcepts: React.FC = () => {
             </ul>
           </div>
 
-          {/* Commercial Company */}
           <div className="bg-indigo-50 p-6 rounded-2xl border border-indigo-100">
             <h3 className="text-xl font-bold text-indigo-900 mb-4 border-b pb-2 border-indigo-200">الشركة التجارية</h3>
             <ul className="space-y-3 text-indigo-800 text-sm leading-relaxed">
@@ -138,10 +134,6 @@ const StageConcepts: React.FC = () => {
             </p>
             <p className="text-xs text-yellow-600 mt-2 italic">تلميح: {THINKING_QUESTIONS.definition.hint}</p>
           </div>
-        </div>
-        
-        <div className="bg-slate-100 p-3 text-center text-xs text-slate-500 font-medium">
-          المصدر: محاضرات في الشركات التجارية، ص 8-9.
         </div>
       </section>
 
@@ -186,10 +178,6 @@ const StageConcepts: React.FC = () => {
             </p>
           </div>
         </div>
-
-        <div className="bg-slate-100 p-3 text-center text-xs text-slate-500 font-medium">
-          المصدر: محاضرات في الشركات التجارية، ص 5-7.
-        </div>
       </section>
 
       {/* 4. Pillars of the Company Contract */}
@@ -208,7 +196,6 @@ const StageConcepts: React.FC = () => {
           <div className="bg-slate-50 rounded-3xl p-8 border border-slate-200">
             <h3 className="text-xl font-bold text-slate-900 mb-6 text-center border-b border-slate-200 pb-3">1. الأركان الموضوعية العامة (م 416 مدني)</h3>
             <div className="grid grid-cols-2 gap-4">
-              {/* Interactive General Pillars */}
               <Tooltip word="الرضـا" content="يجب أن يكون الرضا موجوداً وصحيحاً (خالياً من عيوب الإرادة كالغلط والتدليس) ومنصباً على بنود العقد." />
               <Tooltip word="الأهليـة" content="يجب أن يكون الشريك أهلاً للتعاقد (19 سنة). في شركات التضامن يشترط الأهلية التجارية." />
               <Tooltip word="المحــل" content="هو النشاط الذي تمارسه الشركة. يجب أن يكون مشروعاً وممكناً وغير مخالف للنظام العام." />
@@ -253,7 +240,6 @@ const StageConcepts: React.FC = () => {
           </div>
         </div>
 
-        {/* Contributions Details */}
         <div className="grid md:grid-cols-3 gap-6">
           {contributions.map((item) => (
             <motion.div
@@ -273,7 +259,6 @@ const StageConcepts: React.FC = () => {
               <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-amber-600 transition-colors">{item.title}</h3>
               <p className="text-slate-500 text-sm">انقر للتفاصيل القانونية</p>
 
-              {/* Expandable Content */}
               <AnimatePresence>
                 {activeContribution === item.id && (
                   <motion.div
@@ -290,7 +275,6 @@ const StageConcepts: React.FC = () => {
           ))}
         </div>
 
-        {/* Critical Thinking 2 */}
         <div className="bg-yellow-50 border-t border-yellow-100 p-6 flex gap-4 items-start mt-6 rounded-xl">
           <div className="bg-yellow-200 p-2 rounded-lg text-yellow-700">
             <Lightbulb className="w-6 h-6" />
@@ -309,7 +293,6 @@ const StageConcepts: React.FC = () => {
   );
 };
 
-// Internal Tooltip Component
 const Tooltip = ({ word, content }: { word: string, content: string }) => {
   const [show, setShow] = useState(false);
   

@@ -200,6 +200,7 @@ const StageConclusion: React.FC = () => {
 
       {/* 3. Exit Ticket Section (Links) */}
       <div className="grid md:grid-cols-2 gap-8">
+        {/* Student Card */}
         <div className="bg-white p-8 rounded-2xl shadow-lg border border-slate-200 text-center flex flex-col items-center justify-center space-y-6 hover:shadow-xl transition-shadow">
           <div className="bg-emerald-100 p-4 rounded-full text-emerald-600">
             <CheckCircle2 className="w-12 h-12" />
@@ -219,6 +220,7 @@ const StageConclusion: React.FC = () => {
           </a>
         </div>
 
+        {/* Teacher Card */}
         <div className="bg-slate-50 p-8 rounded-2xl border border-slate-200 flex flex-col justify-center">
           <div className="flex items-center gap-3 mb-6">
             <div className="bg-slate-200 p-2 rounded-lg text-slate-600">
